@@ -23,7 +23,7 @@ export default function Terms() {
 
             <h2 className="text-xl font-bold mt-8 mb-4">3. Artwork Approval & Deadlines</h2>
             <p className="mb-4 text-slate-600 leading-relaxed">
-              You will be provided a digital proof of your ad. You are responsible for reviewing and approving the final proof by the stated deadline. Failure to approve artwork by the deadline may result in exclusion from the drop without a refund. LocalReach 9x12 is not responsible for typos or errors approved by the client.
+              You will be provided a digital proof of your ad. You are responsible for reviewing and approving the final proof by the stated deadline. Failure to approve artwork by the deadline may result in exclusion from the drop without a refund. YourLocalShowcase is not responsible for typos or errors approved by the client.
             </p>
 
             <h2 className="text-xl font-bold mt-8 mb-4">4. USPS Delivery Disclaimer</h2>
@@ -33,7 +33,7 @@ export default function Terms() {
 
             <h2 className="text-xl font-bold mt-8 mb-4">5. Limitation of Liability</h2>
             <p className="mb-4 text-slate-600 leading-relaxed">
-              LocalReach 9x12 makes no guarantees regarding the response rate or return on investment from your ad. In the event of an error or failure on our part (e.g., printing error, missed delivery), our total liability is strictly capped at the total fee paid by you for that specific mailing.
+              YourLocalShowcase makes no guarantees regarding the response rate or return on investment from your ad. In the event of an error or failure on our part (e.g., printing error, missed delivery), our total liability is strictly capped at the total fee paid by you for that specific mailing.
             </p>
           </div>
         </div>

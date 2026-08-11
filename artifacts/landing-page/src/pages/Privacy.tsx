@@ -39,7 +39,7 @@ export default function PrivacyPolicy() {
             <h2 className="text-xl font-bold mt-8 mb-4">5. Contact Us</h2>
             <p className="mb-4 text-slate-600 leading-relaxed">
               If you have any questions about this Privacy Policy, please contact us at: <br/>
-              <a href="mailto:support@localreach9x12.com" className="text-primary hover:underline">support@localreach9x12.com</a>
+              <a href="mailto:support@yourlocalshowcase.online" className="text-primary hover:underline">support@yourlocalshowcase.online</a>
             </p>
           </div>
         </div>

@@ -14,7 +14,7 @@ export function Navbar() {
       <div className="container mx-auto px-4 h-20 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
           <span className="font-display font-black text-2xl tracking-tighter text-foreground">
-            LocalReach <span className="text-primary">9x12</span>
+            YourLocalShowcase
           </span>
         </Link>
         
