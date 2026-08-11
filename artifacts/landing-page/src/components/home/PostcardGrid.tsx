@@ -20,7 +20,7 @@ const GRID_SLOTS = [
 
 export function PostcardGrid({ onSelectSlot }: { onSelectSlot: () => void }) {
   return (
-    <section id="card-layout" className="py-24 bg-white overflow-hidden">
+    <section id="card-layout" className="py-24 bg-white overflow-hidden scroll-mt-20">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-5xl font-black mb-6">See The Mailer Layout</h2>

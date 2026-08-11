@@ -66,7 +66,7 @@ export function LeadForm({ prefilledCategory = "" }: LeadFormProps) {
 
   if (success) {
     return (
-      <section id="lead-form" className="py-24 bg-slate-50">
+      <section id="lead-form" className="py-24 bg-slate-50 scroll-mt-20">
         <div className="container mx-auto px-4 max-w-2xl">
           <div className="bg-white p-12 rounded-2xl shadow-xl text-center border border-slate-100">
             <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -86,7 +86,7 @@ export function LeadForm({ prefilledCategory = "" }: LeadFormProps) {
   }
 
   return (
-    <section id="lead-form" className="py-24 bg-slate-50">
+    <section id="lead-form" className="py-24 bg-slate-50 scroll-mt-20">
       <div className="container mx-auto px-4 max-w-3xl">
         <div className="bg-white rounded-2xl shadow-xl border border-slate-100 overflow-hidden">
           <div className="bg-primary p-8 text-white text-center relative overflow-hidden">

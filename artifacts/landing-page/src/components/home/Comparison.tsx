@@ -3,7 +3,7 @@ import { Check } from "lucide-react"
 
 export function Comparison() {
   return (
-    <section id="pricing" className="py-24 bg-slate-50">
+    <section id="pricing" className="py-24 bg-slate-50 scroll-mt-20">
       <div className="container mx-auto px-4 max-w-5xl">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-5xl font-black mb-6">Why Shared Mailers Win</h2>

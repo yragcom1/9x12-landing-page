@@ -21,7 +21,7 @@ export function HowItWorks() {
   ]
 
   return (
-    <section id="how-it-works" className="py-24 bg-slate-900 text-white relative overflow-hidden">
+    <section id="how-it-works" className="py-24 bg-slate-900 text-white relative overflow-hidden scroll-mt-20">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/20 via-slate-900 to-slate-900"></div>
       
       <div className="container relative mx-auto px-4 max-w-5xl z-10">

@@ -11,7 +11,7 @@ export function Hero() {
   };
 
   return (
-    <section className="relative pt-20 pb-24 overflow-hidden bg-white">
+    <section className="relative pt-32 pb-24 overflow-hidden bg-white">
       {/* Abstract background blobs */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3" />
       <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-secondary/5 rounded-full blur-3xl translate-y-1/3 -translate-x-1/4" />
