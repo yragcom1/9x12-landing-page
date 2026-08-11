@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "LocalReach 9x12 Landing Page"
+description = "A high-converting multi-page landing page for LocalReach 9x12, a local co-op postcard advertising agency. Includes a hero, comparison section, interactive postcard grid, how-it-works steps, lead capture form connected to Sender.net via a backend API, FAQ accordion, and legal pages (privacy policy and terms)."
+version = "1.0.0"
+id = "artifacts/landing-page"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 18083
+
+[services.development]
+run = "pnpm --filter @workspace/landing-page run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/landing-page", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/landing-page/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "18083"
+BASE_PATH = "/"

@@ -5,9 +5,6 @@
  * API specification
  * OpenAPI spec version: 0.1.0
  */
-export interface HealthStatus {
-  status: string;
-}
 
 export interface SubscribeInput {
   email: string;
@@ -17,13 +14,3 @@ export interface SubscribeInput {
   category: string;
   agreedToTerms: boolean;
 }
-
-export interface SubscribeResult {
-  success: boolean;
-  message: string;
-}
-
-export interface ErrorResult {
-  error: string;
-}
-

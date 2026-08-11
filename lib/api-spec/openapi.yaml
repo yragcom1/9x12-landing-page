@@ -10,6 +10,8 @@ servers:
 tags:
   - name: health
     description: Health operations
+  - name: subscribe
+    description: Email subscription operations
 paths:
   /healthz:
     get:
@@ -24,6 +26,37 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+  /subscribe:
+    post:
+      operationId: subscribe
+      tags: [subscribe]
+      summary: Subscribe a lead to Sender.net
+      description: Captures lead info and forwards it to Sender.net via their API v2
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SubscribeInput"
+      responses:
+        "200":
+          description: Successfully subscribed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SubscribeResult"
+        "400":
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResult"
+        "500":
+          description: Server or upstream error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResult"
 components:
   schemas:
     HealthStatus:
@@ -33,4 +66,43 @@ components:
           type: string
       required:
         - status
-
+    SubscribeInput:
+      type: object
+      required:
+        - email
+        - firstName
+        - businessName
+        - phone
+        - category
+        - agreedToTerms
+      properties:
+        email:
+          type: string
+          format: email
+        firstName:
+          type: string
+        businessName:
+          type: string
+        phone:
+          type: string
+        category:
+          type: string
+        agreedToTerms:
+          type: boolean
+    SubscribeResult:
+      type: object
+      required:
+        - success
+        - message
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+    ErrorResult:
+      type: object
+      required:
+        - error
+      properties:
+        error:
+          type: string
