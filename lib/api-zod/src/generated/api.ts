@@ -22,7 +22,7 @@ export const HealthCheckResponse = zod.object({
  * @summary Subscribe a lead to Sender.net
  */
 export const SubscribeBody = zod.object({
-  "email": zod.email(),
+  "email": zod.string(),
   "firstName": zod.string(),
   "businessName": zod.string(),
   "phone": zod.string(),

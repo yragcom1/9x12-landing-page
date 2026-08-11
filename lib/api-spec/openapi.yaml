@@ -78,7 +78,6 @@ components:
       properties:
         email:
           type: string
-          format: email
         firstName:
           type: string
         businessName:
