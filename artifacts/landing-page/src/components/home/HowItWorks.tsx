@@ -47,7 +47,7 @@ export function HowItWorks() {
               transition={{ delay: idx * 0.2 }}
               className="relative z-10 flex flex-col items-center text-center"
             >
-              <div className="w-24 h-24 rounded-2xl bg-slate-800 border border-slate-700 flex items-center justify-center mb-6 shadow-xl relative group overflow-hidden">
+              <div className="w-24 h-24 rounded-2xl bg-slate-800 border border-slate-700 flex items-center justify-center mb-6 shadow-xl relative group">
                 <div className="absolute inset-0 bg-primary/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out"></div>
                 <step.icon className="w-10 h-10 text-primary relative z-10" />
                 <div className="absolute -top-3 -right-3 w-8 h-8 rounded-full bg-secondary text-white font-bold flex items-center justify-center text-sm border-4 border-slate-900">
