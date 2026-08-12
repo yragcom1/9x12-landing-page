@@ -7,6 +7,7 @@ import NotFound from '@/pages/not-found';
 import Home from '@/pages/Home';
 import Privacy from '@/pages/Privacy';
 import Terms from '@/pages/Terms';
+import Contact from '@/pages/Contact';
 import {
   Route,
   Switch,
@@ -23,6 +24,7 @@ function Router() {
         <Route path="/" component={Home} />
         <Route path="/privacy-policy" component={Privacy} />
         <Route path="/terms" component={Terms} />
+        <Route path="/contact" component={Contact} />
         <Route component={NotFound} />
       </Switch>
     </RoutedErrorBoundary>

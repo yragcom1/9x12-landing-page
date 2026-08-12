@@ -1,11 +1,21 @@
-import { Link } from "wouter"
+import { Link, useLocation } from "wouter"
 import { Button } from "@/components/ui/button"
 
 export function Navbar() {
+  const [location, navigate] = useLocation();
+
   const scrollTo = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
+    } else if (location !== '/') {
+      // Section lives on the home page — navigate there first, then scroll.
+      navigate('/');
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+        });
+      });
     }
   };
 
@@ -31,6 +41,9 @@ export function Navbar() {
           <button onClick={() => scrollTo('faq')} className="hover:text-foreground transition-colors cursor-pointer">
             FAQ
           </button>
+          <Link href="/contact" className="hover:text-foreground transition-colors">
+            Contact
+          </Link>
         </nav>
 
         <Button 
