@@ -4,6 +4,31 @@ import { ReplitConnectors } from "@replit/connectors-sdk";
 
 const router: IRouter = Router();
 
+// --- Spam protection: simple in-memory per-IP rate limiter ---
+const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000; // 1 hour
+const RATE_LIMIT_MAX = 5; // max submissions per IP per window
+const submissionLog = new Map<string, number[]>();
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const timestamps = (submissionLog.get(ip) ?? []).filter(
+    (t) => now - t < RATE_LIMIT_WINDOW_MS,
+  );
+  if (timestamps.length >= RATE_LIMIT_MAX) {
+    submissionLog.set(ip, timestamps);
+    return true;
+  }
+  timestamps.push(now);
+  submissionLog.set(ip, timestamps);
+  // Keep the map from growing unboundedly
+  if (submissionLog.size > 10000) {
+    for (const [key, ts] of submissionLog) {
+      if (ts.every((t) => now - t >= RATE_LIMIT_WINDOW_MS)) submissionLog.delete(key);
+    }
+  }
+  return false;
+}
+
 function base64url(input: string): string {
   return Buffer.from(input, "utf8")
     .toString("base64")
@@ -20,7 +45,23 @@ router.post("/contact", async (req, res): Promise<void> => {
     return;
   }
 
-  const { name, email, subject, message } = parsed.data;
+  const { name, email, subject, message, website } = parsed.data;
+
+  // Honeypot: real users never fill this hidden field. Pretend success for bots.
+  if (website && website.trim() !== "") {
+    req.log.warn({ ip: req.ip }, "Contact honeypot triggered — dropping submission");
+    res.json({
+      success: true,
+      message: "Thanks for reaching out! We'll get back to you within one business day.",
+    });
+    return;
+  }
+
+  if (isRateLimited(req.ip ?? "unknown")) {
+    req.log.warn({ ip: req.ip }, "Contact rate limit exceeded");
+    res.status(429).json({ error: "Too many messages. Please try again later." });
+    return;
+  }
 
   try {
     const connectors = new ReplitConnectors();

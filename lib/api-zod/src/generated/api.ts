@@ -44,7 +44,8 @@ export const ContactBody = zod.object({
   "name": zod.string(),
   "email": zod.string(),
   "subject": zod.string().optional(),
-  "message": zod.string()
+  "message": zod.string(),
+  "website": zod.string().optional().describe('Honeypot field — must be left empty by real users')
 })
 
 export const ContactResponse = zod.object({

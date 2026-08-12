@@ -136,6 +136,9 @@ components:
           type: string
         message:
           type: string
+        website:
+          type: string
+          description: Honeypot field — must be left empty by real users
     ContactResult:
       type: object
       required:

@@ -13,12 +13,13 @@ export default function Contact() {
   const [subject, setSubject] = useState("")
   const [message, setMessage] = useState("")
   const [sent, setSent] = useState(false)
+  const [website, setWebsite] = useState("") // honeypot — hidden from real users
   const contact = useContact()
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     contact.mutate(
-      { data: { name, email, subject, message } },
+      { data: { name, email, subject, message, website } },
       {
         onSuccess: () => {
           setSent(true)
@@ -119,6 +120,18 @@ export default function Contact() {
               <>
               <h2 className="text-2xl font-black mb-6">Send Us a Message</h2>
               <form onSubmit={handleSubmit} className="space-y-4">
+                {/* Honeypot field — invisible to humans, bots tend to fill it */}
+                <div className="absolute -left-[9999px] top-auto" aria-hidden="true">
+                  <label htmlFor="contact-website">Website</label>
+                  <input
+                    id="contact-website"
+                    type="text"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    value={website}
+                    onChange={(e) => setWebsite(e.target.value)}
+                  />
+                </div>
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div>
                     <label htmlFor="contact-name" className="block text-sm font-medium mb-1.5">

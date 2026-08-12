@@ -23,6 +23,8 @@ export interface ContactInput {
   email: string;
   subject?: string;
   message: string;
+  /** Honeypot field — must be left empty by real users */
+  website?: string;
 }
 
 export interface ContactResult {
