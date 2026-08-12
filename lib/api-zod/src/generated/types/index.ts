@@ -6,6 +6,8 @@
  * OpenAPI spec version: 0.1.0
  */
 
+export * from './contactInput';
+export * from './contactResult';
 export * from './errorResult';
 export * from './healthStatus';
 export * from './subscribeInput';

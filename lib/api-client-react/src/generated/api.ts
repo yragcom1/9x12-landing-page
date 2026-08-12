@@ -20,6 +20,8 @@ import type {
 } from '@tanstack/react-query';
 
 import type {
+  ContactInput,
+  ContactResult,
   ErrorResult,
   HealthStatus,
   SubscribeInput,
@@ -201,5 +203,77 @@ export const useSubscribe = <TError = ErrorType<ErrorResult>,
         TContext
       > => {
       return useMutation(getSubscribeMutationOptions(options));
+    }
+
+export const getContactUrl = () => {
+
+
+
+
+  return `/api/contact`
+}
+
+/**
+ * Forwards a contact form message to the business inbox via Gmail
+ * @summary Send a contact form message
+ */
+export const contact = async (contactInput: ContactInput, options?: Parameters<typeof customFetch>[1]): Promise<ContactResult> => {
+
+  return customFetch<ContactResult>(getContactUrl(),
+  {
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(contactInput)
+  }
+);}
+
+
+
+
+
+export const getContactMutationOptions = <TError = ErrorType<ErrorResult>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof contact>>, TError,{data: BodyType<ContactInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof contact>>, TError,{data: BodyType<ContactInput>}, TContext> => {
+
+const mutationKey = ['contact'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof contact>>, {data: BodyType<ContactInput>}> = (props) => {
+          const {data} = props ?? {};
+
+          return  contact(data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type ContactMutationResult = NonNullable<Awaited<ReturnType<typeof contact>>>
+    export type ContactMutationBody = BodyType<ContactInput>
+    export type ContactMutationError = ErrorType<ErrorResult>
+
+    /**
+ * @summary Send a contact form message
+ */
+export const useContact = <TError = ErrorType<ErrorResult>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof contact>>, TError,{data: BodyType<ContactInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof contact>>,
+        TError,
+        {data: BodyType<ContactInput>},
+        TContext
+      > => {
+      return useMutation(getContactMutationOptions(options));
     }
 

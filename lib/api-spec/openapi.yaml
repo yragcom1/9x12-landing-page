@@ -12,6 +12,8 @@ tags:
     description: Health operations
   - name: subscribe
     description: Email subscription operations
+  - name: contact
+    description: Contact form operations
 paths:
   /healthz:
     get:
@@ -57,6 +59,37 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResult"
+  /contact:
+    post:
+      operationId: contact
+      tags: [contact]
+      summary: Send a contact form message
+      description: Forwards a contact form message to the business inbox via Gmail
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ContactInput"
+      responses:
+        "200":
+          description: Message sent
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ContactResult"
+        "400":
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResult"
+        "500":
+          description: Server or upstream error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResult"
 components:
   schemas:
     HealthStatus:
@@ -88,6 +121,31 @@ components:
           type: string
         agreedToTerms:
           type: boolean
+    ContactInput:
+      type: object
+      required:
+        - name
+        - email
+        - message
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        subject:
+          type: string
+        message:
+          type: string
+    ContactResult:
+      type: object
+      required:
+        - success
+        - message
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
     SubscribeResult:
       type: object
       required:

@@ -2,7 +2,8 @@ import { useState } from "react"
 import { Navbar } from "@/components/layout/Navbar"
 import { Footer } from "@/components/layout/Footer"
 import { Button } from "@/components/ui/button"
-import { Mail, Phone, Clock, MapPin } from "lucide-react"
+import { Mail, Phone, Clock, MapPin, CheckCircle } from "lucide-react"
+import { useContact } from "@workspace/api-client-react"
 
 const SUPPORT_EMAIL = "support@yourlocalshowcase.online"
 
@@ -11,13 +12,23 @@ export default function Contact() {
   const [email, setEmail] = useState("")
   const [subject, setSubject] = useState("")
   const [message, setMessage] = useState("")
+  const [sent, setSent] = useState(false)
+  const contact = useContact()
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    const body = `Name: ${name}\nEmail: ${email}\n\n${message}`
-    window.location.href = `mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent(
-      subject || "Website Inquiry",
-    )}&body=${encodeURIComponent(body)}`
+    contact.mutate(
+      { data: { name, email, subject, message } },
+      {
+        onSuccess: () => {
+          setSent(true)
+          setName("")
+          setEmail("")
+          setSubject("")
+          setMessage("")
+        },
+      },
+    )
   }
 
   return (
@@ -91,6 +102,21 @@ export default function Contact() {
 
             {/* Contact form */}
             <div className="md:col-span-3 bg-white p-8 rounded-2xl shadow-sm border">
+              {sent ? (
+                <div className="h-full flex flex-col items-center justify-center text-center py-12">
+                  <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-6">
+                    <CheckCircle className="w-8 h-8 text-green-600" />
+                  </div>
+                  <h2 className="text-2xl font-black mb-3">Message Sent!</h2>
+                  <p className="text-muted-foreground mb-8 max-w-sm">
+                    Thanks for reaching out. We'll get back to you within one business day.
+                  </p>
+                  <Button variant="outline" onClick={() => setSent(false)}>
+                    Send Another Message
+                  </Button>
+                </div>
+              ) : (
+              <>
               <h2 className="text-2xl font-black mb-6">Send Us a Message</h2>
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="grid sm:grid-cols-2 gap-4">
@@ -150,13 +176,23 @@ export default function Contact() {
                     placeholder="Tell us how we can help..."
                   />
                 </div>
-                <Button type="submit" size="lg" className="w-full font-bold">
-                  Send Message
+                <Button
+                  type="submit"
+                  size="lg"
+                  className="w-full font-bold"
+                  disabled={contact.isPending}
+                >
+                  {contact.isPending ? "Sending..." : "Send Message"}
                 </Button>
-                <p className="text-xs text-muted-foreground text-center">
-                  This opens your email app with the message pre-filled, sent to {SUPPORT_EMAIL}.
-                </p>
+                {contact.isError && (
+                  <p className="text-sm text-red-600 text-center">
+                    Something went wrong sending your message. Please try again, or email
+                    us directly at {SUPPORT_EMAIL}.
+                  </p>
+                )}
               </form>
+              </>
+              )}
             </div>
           </div>
         </div>

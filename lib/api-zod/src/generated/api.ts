@@ -36,3 +36,20 @@ export const SubscribeResponse = zod.object({
 })
 
 
+/**
+ * Forwards a contact form message to the business inbox via Gmail
+ * @summary Send a contact form message
+ */
+export const ContactBody = zod.object({
+  "name": zod.string(),
+  "email": zod.string(),
+  "subject": zod.string().optional(),
+  "message": zod.string()
+})
+
+export const ContactResponse = zod.object({
+  "success": zod.boolean(),
+  "message": zod.string()
+})
+
+

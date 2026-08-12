@@ -18,6 +18,18 @@ export interface SubscribeInput {
   agreedToTerms: boolean;
 }
 
+export interface ContactInput {
+  name: string;
+  email: string;
+  subject?: string;
+  message: string;
+}
+
+export interface ContactResult {
+  success: boolean;
+  message: string;
+}
+
 export interface SubscribeResult {
   success: boolean;
   message: string;
