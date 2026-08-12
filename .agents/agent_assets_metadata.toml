@@ -1,0 +1,9 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "nZmoIgPyMH98n-k7dN286"
+uri = "file://attached_assets/yourlocalshowcase-site.zip"
+type = "unspecified"
+title = "YourLocalShowcase site files (upload to Hostinger)"
+description = "Zipped production build. Extract the contents directly into public_html so index.html sits at the web root."
