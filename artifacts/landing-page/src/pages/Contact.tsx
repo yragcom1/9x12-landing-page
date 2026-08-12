@@ -50,7 +50,7 @@ export default function Contact() {
               </a>
 
               <a
-                href="tel:5551234567"
+                href="tel:4079076626"
                 className="flex items-start gap-4 bg-white p-6 rounded-2xl shadow-sm border hover:border-primary transition-colors"
               >
                 <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
@@ -58,7 +58,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <div className="font-bold">Call Us</div>
-                  <div className="text-sm text-muted-foreground">(555) 123-4567</div>
+                  <div className="text-sm text-muted-foreground">(407) 907-6626</div>
                 </div>
               </a>
 

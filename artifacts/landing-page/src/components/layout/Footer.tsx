@@ -32,8 +32,8 @@ export function Footer() {
           <a href="mailto:support@yourlocalshowcase.online" className="hover:text-foreground transition-colors">
             support@yourlocalshowcase.online
           </a>
-          <a href="tel:5551234567" className="hover:text-foreground transition-colors">
-            (555) 123-4567
+          <a href="tel:4079076626" className="hover:text-foreground transition-colors">
+            (407) 907-6626
           </a>
         </div>
       </div>
